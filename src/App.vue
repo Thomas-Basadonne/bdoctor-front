@@ -1,9 +1,9 @@
 <script setup>
-import HomePage from './pages/HomePage.vue';
+import ListDoc from "./views/pages/ListDoc.vue";
 </script>
 
 <template>
-  <HomePage />
+  <ListDoc />
 </template>
 
 <style lang="scss">
