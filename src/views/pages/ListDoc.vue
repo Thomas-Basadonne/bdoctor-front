@@ -6,12 +6,26 @@ export default {
   data() {
     return {
       doctors: [],
+      typologies: []
     };
   },
   mounted() {
     this.getDoctors();
+    this.getTypology();
   },
   methods: {
+
+    getTypology() {
+
+      axios.get("http://localhost:8000/api/typologies", {
+      }).then((resp) => {
+        this.typologies = resp.data.result;
+      })
+        .catch((error) => {
+          console.error(error);
+        });;
+    },
+
     getDoctors() {
       axios
         .get("http://localhost:8000/api/doctors")
@@ -32,18 +46,20 @@ export default {
     <div class="row row-cols-3">
       <div class="col" v-for="doctor in doctors" :key="doctor.id">
         <div class="card">
-          <img src="..." class="card-img-top" alt="..." />
+          <img :src="doctor.photo" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">{{ doctor.user.name }}</h5>
             <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+              {{ doctor.description }}
             </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">{{ doctor.user.email }}</li>
+            <li class="list-group-item">{{ doctor.address }}</li>
+            <div v-for="typology in typologies" :key="typology.id">
+              <li class="list-group-item">asdad{{ typology.name }}</li>
+            </div>
+
           </ul>
           <div class="card-body">
             <a href="#" class="card-link">Card link</a>
