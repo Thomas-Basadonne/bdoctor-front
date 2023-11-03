@@ -11,11 +11,11 @@ export default {
   },
   mounted() {
     this.getDoctors();
-    this.getTypology();
+    this.getTypologies();
   },
   methods: {
 
-    getTypology() {
+    getTypologies() {
 
       axios.get("http://localhost:8000/api/typologies", {
       }).then((resp) => {
@@ -56,9 +56,8 @@ export default {
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{ doctor.user.email }}</li>
             <li class="list-group-item">{{ doctor.address }}</li>
-            <div v-for="typology in typologies" :key="typology.id">
-              <li class="list-group-item">asdad{{ typology.name }}</li>
-            </div>
+            <li class="list-group-item"></li>
+
 
           </ul>
           <div class="card-body">
@@ -66,6 +65,9 @@ export default {
             <a href="#" class="card-link">Another link</a>
           </div>
         </div>
+      </div>
+      <div v-for="typology in typologies" :key="doctor.id">
+        <li class="list-group-item">{{ }}</li>
       </div>
     </div>
   </div>
